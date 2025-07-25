@@ -528,7 +528,7 @@
     };
 
     // Send the email
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+    emailjs.send("service_dm19sjw", "YOUR_TEMPLATE_ID", templateParams)
       .then(function(response) {
         Swal.fire("Success!", "Your message has been sent!", "success");
         document.querySelector('.contact-form').reset();
@@ -537,7 +537,7 @@
         console.error('EmailJS Error:', error);
       });
   }
-</script>
+</script> 
 
   <!-- <script>
     function sendEmail(event) {
