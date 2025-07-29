@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Success</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+<script>
+  // Show Swal only if redirected from submit
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('submitted')) {
+    Swal.fire({
+      title: 'Message Sent!',
+      text: 'Thank you for contacting us.',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    }).then(() => {
+      // Optional: redirect after OK
+      window.location.href = 'elements.html';
+    });
+  }
+</script>
+
+</body>
+</html>

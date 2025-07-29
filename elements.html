@@ -247,45 +247,53 @@
         <div class="col-lg-4">
           <div class="custom-block" data-aos="fade-up" data-aos-delay="100">
             <h2 class="section-title">Form</h2>
-            <form class="contact-form bg-white" onsubmit="sendEmail(event)">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="text-black" for="fname">First name</label>
-                    <input type="text" class="form-control" id="fname" required>
-                  </div>
+            <!-- <form class="contact-form bg-white" onsubmit="sendEmail(event)" > -->
+             <!-- <form class="contact-form bg-white" action="/MeTravles_WEBBY/submitform.php" method="POST"> -->
+          <form class="contact-form bg-white" id="contactForm" data-parsley-validate>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="text-black" for="fname">First name</label>
+                  <input type="text" class="form-control" id="fname" name="fname" required>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="text-black" for="lname">Last name</label>
-                    <input type="text" class="form-control" id="lname" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="text-black" for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" required>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="text-black" for="phone">Phone</label>
-                    <input type="tel" class="form-control" id="phone" required pattern="[0-9]{10,12}" minlength="10"
-                      maxlength="12" title="Phone number must be between 10 to 12 digits and only contain numbers.">
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="text-black" for="message">Message</label>
-                <textarea class="form-control" id="message" rows="5" required></textarea>
               </div>
 
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary">Submit</button>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="text-black" for="lname">Last name</label>
+                  <input type="text" class="form-control" id="lname" name="lname" required>
+                </div>
               </div>
-            </form>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="text-black" for="email">Email address</label>
+                  <input type="email" class="form-control" id="email" name="email" required data-parsley-type="email">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="text-black" for="phone">Phone</label>
+                  <input type="tel" class="form-control" id="phone" name="phone"
+                        required pattern="[0-9]{10,12}" data-parsley-pattern="^\d{10,12}$"
+                        data-parsley-pattern-message="Phone number must be 10–12 digits">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="text-black" for="message">Message</label>
+              <textarea class="form-control" id="message" rows="5" name="message" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+
           </div>
 
           <div class="custom-block" data-aos="fade-up">
@@ -473,6 +481,12 @@
     </div>
 
 
+<div id="loader" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#00000088;z-index:9999;text-align:center;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);color:#fff;font-size:20px;">
+    Sending...
+  </div>
+</div>
+
 
     <div class="inner dark">
       <div class="container">
@@ -496,48 +510,78 @@
     </div>
   </div>
 
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.fancybox.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/moment.min.js"></script>
-  <script src="js/daterangepicker.js"></script>
+<!-- jQuery first -->
+<script src="js/jquery-3.4.1.min.js"></script>
 
-  <script src="js/typed.js"></script>
+<!-- Bootstrap and dependencies -->
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
-  <script src="js/custom.js"></script>
+<!-- Parsley validation -->
+<script src="https://cdn.jsdelivr.net/npm/parsleyjs@2/dist/parsley.min.js"></script>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Other optional plugins -->
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.fancybox.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/daterangepicker.js"></script>
+<script src="js/typed.js"></script>
+
+<!-- Custom Scripts -->
+<script src="js/custom.js"></script>
+
   <!-- EmailJS Script -->
-<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
-  // Initialize with your public key
-  emailjs.init('q0C3HZavQiaN-DMCd');  
-  function sendEmail(event) {
-    event.preventDefault();  // Prevent form reload
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('contactForm');
+  const loader = document.getElementById('loader');
 
-    // Prepare parameters
-    const templateParams = {
-      fname: document.getElementById("fname").value,
-      lname: document.getElementById("lname").value,
-      email: document.getElementById("email").value,
-      phone: document.getElementById("phone").value,
-      message: document.getElementById("message").value
-    };
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-    // Send the email
-    emailjs.send("service_dm19sjw", "YOUR_TEMPLATE_ID", templateParams)
-      .then(function(response) {
-        Swal.fire("Success!", "Your message has been sent!", "success");
-        document.querySelector('.contact-form').reset();
-      }, function(error) {
-        Swal.fire("Error", "There was an error sending your message.", "error");
-        console.error('EmailJS Error:', error);
-      });
-  }
-</script> 
+    // Check HTML5 validation
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    // Show loader
+    loader.style.display = 'block';
+
+    // Send form via fetch
+    fetch('/MeTravles_WEBBY/submitform.php', {
+      method: 'POST',
+      body: new FormData(form)
+    })
+    .then(res => res.json())
+    .then(data => {
+      loader.style.display = 'none';
+      if (data.success) {
+        Swal.fire('Success!', 'Your message has been sent!', 'success')
+          .then(() => window.location.href = 'elements.html');
+      } else {
+        Swal.fire('Error', data.error || 'Something went wrong.', 'error');
+      }
+    })
+    .catch(() => {
+      loader.style.display = 'none';
+      Swal.fire('Error', 'Server is not responding.', 'error');
+    });
+  });
+});
+</script>
+
+
+
+
+
+
 
   <!-- <script>
     function sendEmail(event) {
